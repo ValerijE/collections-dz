@@ -111,11 +111,7 @@ public class EvvLinkedList <T> {
      */
     public T get(int index) {
         Objects.checkIndex(index, size);
-        Node<T> curNode = head;
-        for (int i = 0; i < index; i++) {
-            curNode = curNode.next;
-        }
-        return curNode.value;
+        return getNodeByIndex(index).value;
     }
 
     /**
@@ -127,12 +123,9 @@ public class EvvLinkedList <T> {
      */
     public T set(int index, T elem) {
         Objects.checkIndex(index, size);
-        Node<T> curNode = head;
-        for (int i = 0; i < index; i++) {
-            curNode = curNode.next;
-        }
-        T oldElem = curNode.value;
-        curNode.value = elem;
+        Node<T> node = getNodeByIndex(index);
+        T oldElem = node.value;
+        node.value = elem;
         return oldElem;
     }
 
@@ -180,5 +173,21 @@ public class EvvLinkedList <T> {
             curNode = curNode.next;
         }
         return null;
+    }
+
+    private Node<T> getNodeByIndex(int index) {
+        Node<T> curNode;
+        if (index < size / 2) { // проход слева направо
+            curNode = head;
+            for (int i = 0; i < index; i++) {
+                curNode = curNode.next;
+            }
+        } else {                // проход справа налево
+            curNode = tail;
+            for (int i = size - 1; i > index; i--) {
+                curNode = curNode.prev;
+            }
+        }
+        return curNode;
     }
 }

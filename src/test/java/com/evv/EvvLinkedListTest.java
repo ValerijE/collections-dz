@@ -117,11 +117,13 @@ class EvvLinkedListTest {
         // when
         String javaResult = stringExample.get(0);
         String groovyResult = stringExample.get(2);
+        String gradleResult = stringExample.get(4);
         String springResult = stringExample.get(initStringExampleSize - 1);
 
         // then
         assertThat(javaResult).isEqualTo("Java");
         assertThat(groovyResult).isEqualTo("Groovy");
+        assertThat(gradleResult).isEqualTo("Gradle");
         assertThat(springResult).isEqualTo("Spring");
     }
 
@@ -146,9 +148,12 @@ class EvvLinkedListTest {
     @Test
     void set() {
         // when
+        String groovyResult = stringExample.set(2, "LiquiBase");
         String jUnitResult = stringExample.set(5, "Mockito");
 
         //then
+        assertThat(groovyResult).isEqualTo("Groovy");
+        assertThat(stringExample.get(2)).isEqualTo("LiquiBase");
         assertThat(jUnitResult).isEqualTo("JUnit");
         assertThat(stringExample.get(5)).isEqualTo("Mockito");
         assertThat(stringExample.size()).isEqualTo(initStringExampleSize);
