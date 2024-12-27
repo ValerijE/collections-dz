@@ -92,7 +92,7 @@ public class EvvLinkedList <T> {
             } else if (nodeToRemove == tail) { // значит удаляем последний элемент
                 nodeToRemove.prev.next = null;
                 tail = nodeToRemove.prev;
-            } else {
+            } else { // значит удаляем элемент в середине
                 nodeToRemove.prev.next = nodeToRemove.next;
                 nodeToRemove.next.prev = nodeToRemove.prev;
             }
@@ -140,8 +140,11 @@ public class EvvLinkedList <T> {
     public EvvLinkedList<T> subList(int from, int to) {
         Objects.checkFromToIndex(from, to, size);
         EvvLinkedList<T> newList = new EvvLinkedList<>();
+
+        Node<T> node = getNodeByIndex(from);
         for (int i = from; i < to; i++) {
-            newList.add(get(i));
+            newList.add(node.value);
+            node = node.next;
         }
         return newList;
     }

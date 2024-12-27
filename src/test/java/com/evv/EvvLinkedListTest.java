@@ -171,14 +171,37 @@ class EvvLinkedListTest {
     }
 
     @Test
-    void subList() {
+    void subList_NormalFlow() {
         // when
         EvvLinkedList<String> result = stringExample.subList(2, 5);
 
+        // then
         assertThat(result.size()).isEqualTo(3);
         assertThat(result.get(0)).isEqualTo("Groovy");
         assertThat(result.get(1)).isEqualTo("Maven");
         assertThat(result.get(2)).isEqualTo("Gradle");
+    }
+
+    @Test
+    void subList_FromHead_NormalFlow() {
+        // when
+        EvvLinkedList<String> result = stringExample.subList(0, 2);
+
+        // then
+        assertThat(result.size()).isEqualTo(2);
+        assertThat(result.get(0)).isEqualTo("Java");
+        assertThat(result.get(1)).isEqualTo("Kotlin");
+    }
+
+    @Test
+    void subList_FromTail_NormalFlow() {
+        // when
+        EvvLinkedList<String> result = stringExample.subList(initStringExampleSize - 2, initStringExampleSize);
+
+        // then
+        assertThat(result.size()).isEqualTo(2);
+        assertThat(result.get(0)).isEqualTo("JUnit");
+        assertThat(result.get(1)).isEqualTo("Spring");
     }
 
     @Test
