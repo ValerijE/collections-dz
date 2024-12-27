@@ -8,7 +8,7 @@ import java.util.Objects;
  * Допускается хранение неограниченного количества элементов null. <br>
  * Гарантируется сохранение порядка добавления элементов в список.
  */
-public class EvvLinkedList <T> {
+public class EvvLinkedList<T> {
 
     /**
      * Размер списка
@@ -28,7 +28,7 @@ public class EvvLinkedList <T> {
     /**
      * Внутренний класс для хранения полей ячейки данных
      */
-    private static class Node <T> {
+    private static class Node<T> {
 
         /**
          * Элемент данных
@@ -45,14 +45,15 @@ public class EvvLinkedList <T> {
          */
         private Node<T> next;
 
-        public Node(T value,Node<T> prev,  Node<T> next) {
+        public Node(T value, Node<T> prev, Node<T> next) {
             this.value = value;
             this.prev = prev;
             this.next = next;
         }
     }
 
-    public EvvLinkedList() { }
+    public EvvLinkedList() {
+    }
 
     /**
      * Добавляет новый элемент в конец списка.
@@ -105,6 +106,7 @@ public class EvvLinkedList <T> {
 
     /**
      * Возвращает элемент, располагающийся в списке по указанному индексу.
+     *
      * @param index индекс запрашиваемого элемента
      * @return элемент, соответствующий переданному индексу
      * @throws IndexOutOfBoundsException если переданный индекс отрицательный или превосходит размер списка
@@ -116,8 +118,9 @@ public class EvvLinkedList <T> {
 
     /**
      * Замещает элемент списка по указанному индексу.
+     *
      * @param index индекс элемента списка, подлежащего замещению
-     * @param elem элемент для замены существующего в списке
+     * @param elem  элемент для замены существующего в списке
      * @return замещенный элемент
      * @throws IndexOutOfBoundsException если переданный индекс отрицательный или превосходит размер списка
      */
@@ -131,11 +134,12 @@ public class EvvLinkedList <T> {
 
     /**
      * Возвращает новый список из элементов списка с индексами от from включительно до to не включительно.
+     *
      * @param from начальная граница диапазона индексов
-     * @param to конечная граница диапазона индексов
+     * @param to   конечная граница диапазона индексов
      * @return новый список
      * @throws IndexOutOfBoundsException если переданный диапазон индексов противоречивый или одна из границ диапазона
-     * превосходит размер списка
+     *                                   превосходит размер списка
      */
     public EvvLinkedList<T> subList(int from, int to) {
         Objects.checkFromToIndex(from, to, size);
@@ -151,6 +155,7 @@ public class EvvLinkedList <T> {
 
     /**
      * Возвращает размер списка
+     *
      * @return размер списка
      */
     public int size() {
@@ -192,5 +197,37 @@ public class EvvLinkedList <T> {
             }
         }
         return curNode;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (this.size != ((EvvLinkedList<?>) o).size) return false;
+
+        EvvLinkedList<T> that = (EvvLinkedList<T>) o;
+        Node<T> node = head;
+        for (int i = 0; i < size; i++) {
+            T thisElem = node.value;
+            T thatElem = that.get(i);
+            if (!Objects.equals(thisElem, thatElem)) {
+                return false;
+            }
+            node = node.next;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        Node<T> node = head;
+        for (int i = 0; i < size; i++) {
+            Object e = node.value;
+            result = 31 * result + (e == null ? 0 : e.hashCode());
+            node = node.next;
+        }
+        return result;
     }
 }

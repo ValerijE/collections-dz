@@ -215,4 +215,82 @@ class EvvArrayListTest {
         // then
         assertThat(result).isEqualTo(0);
     }
+
+    @Test
+    void equals_IdenticallyElements_ShouldReturnTrue() {
+        // given
+        EvvArrayList<String> stringExample2 = new EvvArrayList<>();
+        stringExample2.add("Java");
+        stringExample2.add("Kotlin");
+        stringExample2.add("Groovy");
+        stringExample2.add("Maven");
+        stringExample2.add("Gradle");
+        stringExample2.add("JUnit");
+        stringExample2.add("Spring");
+
+        // when
+        boolean result = stringExample.equals(stringExample2);
+
+        // then
+        assertThat(result).isTrue();
+    }
+
+    @Test
+    void equals_NotIdenticallyElements_ShouldReturnFalse() {
+        // given
+        EvvArrayList<String> stringExample2 = new EvvArrayList<>();
+        stringExample2.add("Java");
+        stringExample2.add("Kotlin");
+        stringExample2.add("Groovy");
+        stringExample2.add("Maven");
+        stringExample2.add("Gradle");
+        stringExample2.add("JUnit");
+        stringExample2.add("Spring2");
+
+        // when
+        boolean result = stringExample.equals(stringExample2);
+
+        // then
+        assertThat(result).isFalse();
+    }
+
+    @Test
+    void hashCode_IdenticallyElements_MustBeTheSame() {
+        // given
+        EvvArrayList<String> stringExample2 = new EvvArrayList<>();
+        stringExample2.add("Java");
+        stringExample2.add("Kotlin");
+        stringExample2.add("Groovy");
+        stringExample2.add("Maven");
+        stringExample2.add("Gradle");
+        stringExample2.add("JUnit");
+        stringExample2.add("Spring");
+
+        // when
+        int result1 = stringExample.hashCode();
+        int result2 = stringExample2.hashCode();
+
+        // then
+        assertThat(result1).isEqualTo(result2);
+    }
+
+    @Test
+    void hashCode_NotIdenticallyElements_MustBeDifferent() {
+        // given
+        EvvArrayList<String> stringExample2 = new EvvArrayList<>();
+        stringExample2.add("Java");
+        stringExample2.add("Kotlin");
+        stringExample2.add("Groovy");
+        stringExample2.add("Maven");
+        stringExample2.add("Gradle");
+        stringExample2.add("JUnit");
+        stringExample2.add("Spring2");
+
+        // when
+        int result1 = stringExample.hashCode();
+        int result2 = stringExample2.hashCode();
+
+        // then
+        assertThat(result1).isNotEqualTo(result2);
+    }
 }

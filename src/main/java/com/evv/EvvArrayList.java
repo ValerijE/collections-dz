@@ -153,4 +153,31 @@ public class EvvArrayList <T> {
         data[size - 1] = null;
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (this.size != ((EvvArrayList<?>) o).size) return false;
+
+        EvvArrayList<T> that = (EvvArrayList<T>) o;
+        for (int i = 0; i < size; i++) {
+            T thisElem = data[i];
+            T thatElem = that.get(i);
+            if (!Objects.equals(thisElem, thatElem)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        for (int i = 0; i < size; i++) {
+            Object e = data[i];
+            result = 31 * result + (e == null ? 0 : e.hashCode());
+        }
+        return result;
+    }
 }
