@@ -63,10 +63,10 @@ public class EvvLinkedList <T> {
     public boolean add(T elem) {
         Node<T> node;
         if (size == 0) {
-            node = new Node<T>(elem, null, null);
+            node = new Node<>(elem, null, null);
             head = node;
         } else {
-            node = new Node<T>(elem, tail, null);
+            node = new Node<>(elem, tail, null);
             tail.next = node;
         }
         tail = node;

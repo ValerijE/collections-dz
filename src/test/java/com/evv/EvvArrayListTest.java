@@ -213,6 +213,6 @@ class EvvArrayListTest {
         int result = stringExample.size();
 
         // then
-        assertThat(stringExample.size()).isEqualTo(0);
+        assertThat(result).isEqualTo(0);
     }
 }
