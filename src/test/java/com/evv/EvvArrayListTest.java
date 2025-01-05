@@ -293,4 +293,28 @@ class EvvArrayListTest {
         // then
         assertThat(result1).isNotEqualTo(result2);
     }
+
+    @Test
+    void constructorTest_zeroCapacity_shouldPassNormally() {
+        // given
+        EvvArrayList<String> stringExample2 = new EvvArrayList<>(0);
+        assertThat(stringExample2.size()).isEqualTo(0);
+        stringExample2.add("Java");
+
+        // when
+        int result = stringExample2.size();
+
+        // then
+        assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    void constructorTest_NegativeCapacity_ShouldThrowIllegalArgumentException() {
+        assertThatThrownBy(() ->
+        // when
+                new EvvArrayList<>(-1))
+        // then
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Передан неверный размер массива списка: -1");
+    }
 }

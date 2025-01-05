@@ -48,6 +48,9 @@ public class EvvArrayList <T> {
      */
     @SuppressWarnings("unchecked")
     public EvvArrayList(int capacity) {
+        if (capacity < 0) {
+            throw new IllegalArgumentException("Передан неверный размер массива списка: " + capacity);
+        }
         this.capacity = capacity;
         this.data = (T[]) new Object[this.capacity];
     }
@@ -59,7 +62,7 @@ public class EvvArrayList <T> {
      * @return true в случае успешного добавления элемента
      */
     public boolean add(T elem) {
-        if (size == capacity - 1) {
+        if ((size == capacity - 1) || (capacity == 0)) { // второе условие на случай если список был создан через конструктор с параметром capacity равным нулю
             increaseSize();
         }
         data[size++] = elem;
