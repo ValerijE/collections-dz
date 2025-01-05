@@ -52,6 +52,9 @@ public class EvvLinkedList<T> {
         }
     }
 
+    /**
+     * Создает пустой список.
+     */
     public EvvLinkedList() {
     }
 

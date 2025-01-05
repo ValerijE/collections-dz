@@ -31,12 +31,21 @@ public class EvvArrayList <T> {
      */
     private int size = 0;
 
+    /**
+     * Создает пустой список с размером массива списка по умолчанию.
+     */
     @SuppressWarnings("unchecked")
     public EvvArrayList() {
         this.capacity = DEFAULT_CAPACITY;
         this.data = (T[]) new Object[this.capacity];
     }
 
+    /**
+     * Создает пустой список с заданным размером массива списка.
+     *
+     * @param  capacity  размер массива списка
+     * @throws IllegalArgumentException если переданный размер массива списка отрицательный
+     */
     @SuppressWarnings("unchecked")
     public EvvArrayList(int capacity) {
         this.capacity = capacity;
@@ -127,7 +136,7 @@ public class EvvArrayList <T> {
 
 
     private void increaseSize() {
-        int newSize = (data.length * 3) / 2 + 1;
+        int newSize = (capacity * 3) / 2 + 1;
         data = Arrays.copyOf(data, newSize);
         capacity = newSize;
     }
