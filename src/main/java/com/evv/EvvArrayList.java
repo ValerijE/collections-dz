@@ -34,10 +34,12 @@ public class EvvArrayList <T> {
     /**
      * Создает пустой список с размером массива списка по умолчанию.
      */
-    @SuppressWarnings("unchecked")
+
     public EvvArrayList() {
         this.capacity = DEFAULT_CAPACITY;
-        this.data = (T[]) new Object[this.capacity];
+        @SuppressWarnings("unchecked") // Аннотировано для возможности создания массива типа T[], т.к. нет конструкции new T[]
+        T[] tempData = (T[]) new Object[this.capacity];
+        this.data = tempData;
     }
 
     /**
@@ -46,13 +48,14 @@ public class EvvArrayList <T> {
      * @param  capacity  размер массива списка
      * @throws IllegalArgumentException если переданный размер массива списка отрицательный
      */
-    @SuppressWarnings("unchecked")
     public EvvArrayList(int capacity) {
         if (capacity < 0) {
             throw new IllegalArgumentException("Передан неверный размер массива списка: " + capacity);
         }
         this.capacity = capacity;
-        this.data = (T[]) new Object[this.capacity];
+        @SuppressWarnings("unchecked") // Аннотировано для возможности создания массива типа T[], т.к. нет конструкции new T[]
+        T[] tempData = (T[]) new Object[this.capacity];
+        this.data = tempData;
     }
 
     /**
